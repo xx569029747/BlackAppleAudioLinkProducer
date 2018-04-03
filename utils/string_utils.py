@@ -12,3 +12,12 @@ def index_of(str_obj, sub_obj):
     except ValueError:
         index = None
     return index
+
+
+def replace(str_obj, index, char):
+    if len(str_obj) - 1 < index:
+        return str_obj + char
+    else:
+        str_list = list(str_obj)
+        str_list[index] = char
+        return ''.join(str_list)

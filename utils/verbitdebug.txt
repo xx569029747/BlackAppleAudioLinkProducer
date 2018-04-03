@@ -1,0 +1,88 @@
+ 
+Blacklist:
+411111f0 400000f0 CD at Int ATAPI
+Removed Nodes: 
+Checking 71c Associations
+
+Current Associations
+ 21171c30 = 3 
+ 21471c10 = 1 
+ 21571c12 = 1 
+ 21671c11 = 1 
+ 21771c00 = 1  note: Changed 0 to 1
+ 21871c50 = 5 
+ 21971c60 = 6 
+ 21a71c5f = 5 
+ 21b71c20 = 2 
+
+  Used associations = 3 1 1 1 1 5 6 5 2
+Unused associations = 4 7 8 9 a b c d e
+
+Correcting duplicate associations
+
+Checking if 3 already exists in: 1 1 1 1 5 6 5 2 
+   no duplicate found
+Checking if 1 already exists in: 3 1 1 1 5 6 5 2 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 1 already exists in: 3 1 1 1 5 6 5 2 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 4
+Checking if 1 already exists in: 3 1 4 1 5 6 5 2 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 7
+Checking if 1 already exists in: 3 1 4 7 5 6 5 2 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 8
+Checking if 5 already exists in: 3 1 4 7 8 6 5 2 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 6 already exists in: 3 1 4 7 8 5 5 2 
+   no duplicate found
+Checking if 5 already exists in: 3 1 4 7 8 5 6 2 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 9
+Checking if 2 already exists in: 3 1 4 7 8 5 6 9 
+   no duplicate found
+
+New 71c Associations
+ Before      After
+--------------------------------------------------
+21171c30   21171c30  21171d01  21171e43  21171f99
+21471c10   21471c10  21471d40  21471e01  21471f01
+21571c12   21571c40  21571d10  21571e01  21571f01
+21671c11   21671c70  21671d60  21671e01  21671f01
+21771c00   21771c80  21771dc5  21771e37  21771f40
+21871c50   21871c50  21871d90  21871ea1  21871f01
+21971c60   21971c60  21971d90  21971ea1  21971f02
+21a71c5f   21a71c90  21a71d30  21a71e81  21a71f01
+21b71c20   21b71c20  21b71d40  21b71e21  21b71f02
+
+Reset 71d Misc to 0
+New 71d Associations
+ Before                After
+--------------------------------------------------
+21171d01   21171c30  21171d00  21171e43  21171f99
+21471d40   21471c10  21471d40  21471e01  21471f01
+21571d10   21571c40  21571d10  21571e01  21571f01
+21671d60   21671c70  21671d60  21671e01  21671f01
+21771dc5   21771c80  21771dc0  21771e37  21771f40
+21871d90   21871c50  21871d90  21871ea1  21871f01
+21971d90   21971c60  21971d90  21971ea1  21971f02
+21a71d30   21a71c90  21a71d30  21a71e81  21a71f01
+21b71d40   21b71c20  21b71d40  21b71e21  21b71f02
+
+Correct 71f 02 FP to 01
+New 71f Associations
+ Before                                    After
+--------------------------------------------------
+21171d01   21171c30  21171d00  21171e43  21171f90
+21471d40   21471c10  21471d40  21471e01  21471f01
+21571d10   21571c40  21571d10  21571e01  21571f01
+21671d60   21671c70  21671d60  21671e01  21671f01
+21771dc5   21771c80  21771dc0  21771e37  21771f40
+21871d90   21871c50  21871d90  21871ea1  21871f01
+21971d90   21971c60  21971d90  21971ea1  21971f01
+21a71d30   21a71c90  21a71d30  21a71e81  21a71f01
+21b71d40   21b71c20  21b71d40  21b71e21  21b71f01
+ 

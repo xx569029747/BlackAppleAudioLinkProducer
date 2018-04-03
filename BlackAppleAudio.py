@@ -39,7 +39,7 @@ def deal(data_dict, keys, key, final_list):
 
 
 def read_to_lines():
-    lines = open('/Users/blue/Downloads/y580_alc269vc_code').readlines()
+    lines = open('/Volumes/EveryThing/Downloads/Audio/audio_1150/alc1150_code').readlines()
     for i in range(len(lines)):
         if index_of(lines[i], 'Node 0x'):
             print lines[i]
