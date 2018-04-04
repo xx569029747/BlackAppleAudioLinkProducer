@@ -17,7 +17,7 @@ def generate_code(linux_audio_code_file):
 
 
 def main():
-    code_file = '/Volumes/EveryThing/Downloads/Audio/audio_1150/alc1150_code'
+    code_file = '/Volumes/Storage/Documents/Private/alc269vc_audio/audio_files/codec_0'
     lines = open(code_file, 'r').readlines()
     tmp_file_path = './tmp_file'
     tmp_file = open(tmp_file_path, 'w')
