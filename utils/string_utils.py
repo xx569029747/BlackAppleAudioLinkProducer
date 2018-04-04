@@ -21,12 +21,3 @@ def replace(str_obj, index, char):
         str_list = list(str_obj)
         str_list[index] = char
         return ''.join(str_list)
-
-
-def read_lines(lines):
-    for i in range(len(lines)):
-        line = lines[i]
-        if index_of(line, 'Node 0x') is not None:
-            print line.strip()
-        if index_of(line, 'Connection: ') is not None:
-            print lines[i + 1].strip().replace('*', '')

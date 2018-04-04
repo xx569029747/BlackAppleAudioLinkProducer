@@ -5,7 +5,7 @@ import commands
 import os
 
 from VerbitObj import VerbitObj
-from utils import string_utils
+from utils import node_utils
 
 
 def generate_code(linux_audio_code_file):
@@ -30,7 +30,8 @@ def main():
     for model in obj.audio_codec:
         for string in model.codec:
             codec += (string + ' ')
-    string_utils.read_lines(lines)
+    nodes = node_utils.read_lines(lines)
+    node_utils.get_connects(nodes)
     os.remove(tmp_file_path)
 
 
