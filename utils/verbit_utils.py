@@ -5,6 +5,7 @@ import commands
 import os
 
 from VerbitObj import VerbitObj
+from utils import string_utils
 
 
 def generate_code(linux_audio_code_file):
@@ -24,7 +25,12 @@ def main():
     for line in lines:
         if line.strip() != 'AFG Function Id: 0x1 (unsol 1)':
             tmp_file.write(line)
-    generate_code(tmp_file_path)
+    obj = generate_code(tmp_file_path)
+    codec = ''
+    for model in obj.audio_codec:
+        for string in model.codec:
+            codec += (string + ' ')
+    string_utils.read_lines(lines)
     os.remove(tmp_file_path)
 
 

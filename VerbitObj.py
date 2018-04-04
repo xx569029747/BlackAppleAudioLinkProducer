@@ -4,94 +4,65 @@ import re
 
 from utils import string_utils
 
+codec_with_line_out = {
+    'Mic at Int': [[0, 6, '5']],
+    'Speaker at Int': [[0, 6, '1']],
+    'Line Out at Ext': [[0, 6, '2']],
+    'Mic at Ext': [[0, 6, '6']],
+    'Line In at Ext': [[0, 6, '5']],
+    'HP Out at Ext': [[0, 6, '3']],
+    'SPDIF Out at Int': [[0, 6, '4']]
+}
+
+codec_without_line_out = {
+    'Mic at Int': [[0, 6, '4']],
+    'HP Out at Ext': [[0, 6, '2']],
+    'Mic at Ext': [[0, 6, '5']],
+    'Line In at Ext': [[0, 6, '4']],
+    'Speaker at Int': [[0, 6, '1']],
+    'SPDIF Out at Int': [[0, 6, '3']]
+}
+
+common_dict = {
+    'Mic at Int': [[0, 7, '0'], [1, 7, '1'], [2, 7, 'a'], [3, 6, '9']],
+    'Speaker at Int': [[0, 7, '0'], [1, 7, '1'], [2, 7, '1'], [3, 6, '9']],
+    'Line Out at Ext': [[0, 7, 'f'], [1, 7, '0'], [2, 7, '0'], [3, 6, '0']],
+    'Mic at Ext': [[0, 7, '0'], [1, 7, '0'], [2, 7, '8'], [3, 6, '0']],
+    'Line In at Ext': [[0, 7, '0'], [1, 7, '0'], [2, 7, '8'], [3, 6, '0']],
+    'HP Out at Ext': [[0, 7, '0'], [1, 7, '0'], [2, 7, '2'], [3, 6, '0']],
+    'SPDIF Out at Int': [[0, 7, '0'], [1, 7, '1'], [2, 7, '4'], [3, 6, '0']]
+}
+
+codec_dict = {}
+
+
+def modify_audio_codec(audio_type, audio_codec):
+    if audio_type in codec_dict:
+        for i in codec_dict[audio_type]:
+            index = i[0]
+            audio_codec[index] = string_utils.replace(audio_codec[index], i[1], i[2])
+    return audio_codec
+
 
 def convert_type(line):
-    if string_utils.index_of(line, 'Line Out at Ext'):
-        return 'Line Out at Ext'
-    elif string_utils.index_of(line, 'Line In at Ext'):
-        return 'Line In at Ext'
-    elif string_utils.index_of(line, 'Mic at Ext'):
-        return 'Mic at Ext'
-    elif string_utils.index_of(line, 'HP Out at Ext'):
-        return 'HP Out at Ext'
-    elif string_utils.index_of(line, 'SPDIF Out at Int'):
-        return 'SPDIF Out at Int'
-    elif string_utils.index_of(line, 'Speaker at Int'):
-        return 'Speaker at Int'
-    elif string_utils.index_of(line, 'Mic at Int'):
-        return 'Mic at Int'
-    else:
-        return None
-
-
-def modify_codec_after_first(audio_type, codec):
-    if audio_type == 'SPDIF Out at Int':
-        codec[0] = string_utils.replace(codec[0], 7, '0')
-        codec[1] = string_utils.replace(codec[1], 7, '1')
-        codec[2] = string_utils.replace(codec[2], 6, '4')
-        codec[3] = string_utils.replace(codec[3], 6, '0')
-    elif audio_type == 'Line Out at Ext':
-        codec[0] = string_utils.replace(codec[0], 7, 'f')
-        codec[1] = string_utils.replace(codec[1], 7, '0')
-        codec[2] = string_utils.replace(codec[2], 6, '0')
-        codec[3] = string_utils.replace(codec[3], 6, '0')
-    elif audio_type == 'Mic at Ext':
-        codec[0] = string_utils.replace(codec[0], 7, '0')
-        codec[1] = string_utils.replace(codec[1], 7, '0')
-        codec[2] = string_utils.replace(codec[2], 6, '8')
-        codec[3] = string_utils.replace(codec[3], 6, '0')
-    elif audio_type == 'Line In at Ext':
-        codec[0] = string_utils.replace(codec[0], 7, '0')
-        codec[1] = string_utils.replace(codec[1], 7, '0')
-        codec[2] = string_utils.replace(codec[2], 6, '8')
-        codec[3] = string_utils.replace(codec[3], 6, '0')
-    elif audio_type == 'HP Out at Ext':
-        codec[0] = string_utils.replace(codec[0], 7, '0')
-        codec[1] = string_utils.replace(codec[1], 7, '0')
-        codec[2] = string_utils.replace(codec[2], 6, '2')
-        codec[3] = string_utils.replace(codec[3], 6, '0')
-    return codec
-
-
-def modify_codec_with_line_out(audio_type, codec):
-    if audio_type == 'SPDIF Out at Int':
-        codec[0] = string_utils.replace(codec[0], 6, '4')
-    elif audio_type == 'Line Out at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '2')
-    elif audio_type == 'Mic at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '6')
-    elif audio_type == 'Line In at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '5')
-    elif audio_type == 'HP Out at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '3')
-    return modify_codec_after_first(audio_type, codec)
-
-
-def modify_codec_without_line_out(audio_type, codec):
-    if audio_type == 'SPDIF Out at Int':
-        codec[0] = string_utils.replace(codec[0], 6, '4')
-    elif audio_type == 'Line Out at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '2')
-    elif audio_type == 'Mic at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '6')
-    elif audio_type == 'Line In at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '5')
-    elif audio_type == 'HP Out at Ext':
-        codec[0] = string_utils.replace(codec[0], 6, '3')
-    return modify_codec_after_first(audio_type, codec)
+    for key in codec_with_line_out:
+        if string_utils.index_of(line, key):
+            return key
+    return None
 
 
 def modify_codec(model_list, has_line_out):
+    global codec_dict
+    if has_line_out:
+        codec_dict = codec_with_line_out
+    else:
+        codec_dict = codec_without_line_out
+    for (key, value) in codec_dict.items():
+        for i in range(len(common_dict[key])):
+            value.append(common_dict[key][i])
+
     for model in model_list:
-        audio_type = model.audio_type
-        print audio_type
-        print model.codec
-        if has_line_out:
-            model.codec = modify_codec_with_line_out(audio_type, model.codec)
-        else:
-            model.codec = modify_codec_without_line_out(audio_type, model.codec)
-        print model.codec
-        print '####################'
+        model.codec = modify_audio_codec(model.audio_type, model.codec)
     return model_list
 
 
@@ -133,4 +104,7 @@ class VerbitObj:
 
     def __init__(self, text):
         self.text = text
+        self.audio_codec = []
+        self.codec = None
+        self.device_id = None
         convert_text_to_obj(self)
