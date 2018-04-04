@@ -103,3 +103,6 @@ ENV/
 
 # idea
 .idea/
+
+# verbit debug file
+verbitdebug.txt
